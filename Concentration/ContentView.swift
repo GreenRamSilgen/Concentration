@@ -12,8 +12,8 @@ struct ContentView: View {
     let tileBack = "⚪️"
     @State private var totalGuesses = 0
     @State private var gameMessage = ""
-    @State private var tiles = ["🚀", "🌶️"]
-    @State private var emojiShowing = Array(repeating: false, count: 4)
+    @State private var tiles = ["🚀", "🌶️", "🦅", "🐢", "🦋", "🌮", "🍕", "🦄"]
+    @State private var emojiShowing = Array(repeating: false, count: 16)
     @State private var guesses : [Int] = []
     @State private var disableButtons = false
     @State private var audioPlayer : AVAudioPlayer!
@@ -28,21 +28,31 @@ struct ContentView: View {
             
             VStack {
                 HStack{
-                    Button(emojiShowing[0] == false ? tileBack : tiles[0]) {
-                        let index = 0
-                        buttonTapped(index: index)
+                    ForEach(0..<4) { index in
+                        Button(emojiShowing[index] == false ? tileBack : tiles[index]) {
+                            buttonTapped(index: index)
+                        }
                     }
-                    Button(emojiShowing[1] == false ? tileBack : tiles[1]) {
-                        let index = 1
-                        buttonTapped(index: index)
+                }
+                HStack{
+                    ForEach(4..<8) { index in
+                        Button(emojiShowing[index] == false ? tileBack : tiles[index]) {
+                            buttonTapped(index: index)
+                        }
                     }
-                    Button(emojiShowing[2] == false ? tileBack : tiles[2]) {
-                        let index = 2
-                        buttonTapped(index: index)
+                }
+                HStack{
+                    ForEach(8..<12) { index in
+                        Button(emojiShowing[index] == false ? tileBack : tiles[index]) {
+                            buttonTapped(index: index)
+                        }
                     }
-                    Button(emojiShowing[3] == false ? tileBack : tiles[3]) {
-                        let index = 3
-                        buttonTapped(index: index)
+                }
+                HStack{
+                    ForEach(12..<16) { index in
+                        Button(emojiShowing[index] == false ? tileBack : tiles[index]) {
+                            buttonTapped(index: index)
+                        }
                     }
                 }
             }
@@ -82,7 +92,7 @@ struct ContentView: View {
                             disableButtons = false
                             guesses.removeAll()
                             gameMessage = ""
-                            emojiShowing = Array(repeating: false, count: 4)
+                            emojiShowing = Array(repeating: false, count: 16)
                             totalGuesses = 0
                             tiles.shuffle()
                         }
@@ -90,7 +100,7 @@ struct ContentView: View {
                         .buttonStyle(.glassProminent)
                         .tint(.orange)
                     }
-                        
+                    
                 }
             }
             .frame(height: 80)
