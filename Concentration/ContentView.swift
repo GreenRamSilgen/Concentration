@@ -27,35 +27,15 @@ struct ContentView: View {
             Spacer()
             
             VStack {
-                HStack{
-                    ForEach(0..<4) { index in
-                        Button(emojiShowing[index] == false ? tileBack : tiles[index]) {
-                            buttonTapped(index: index)
+                ForEach(0..<4) { row in
+                    HStack{
+                        ForEach((row*4)..<((row*4)+4), id: \.self) { index in
+                            Button(emojiShowing[index] == false ? tileBack : tiles[index]) {
+                                buttonTapped(index: index)
+                            }
                         }
                     }
-                }
-                HStack{
-                    ForEach(4..<8) { index in
-                        Button(emojiShowing[index] == false ? tileBack : tiles[index]) {
-                            buttonTapped(index: index)
-                        }
-                    }
-                }
-                HStack{
-                    ForEach(8..<12) { index in
-                        Button(emojiShowing[index] == false ? tileBack : tiles[index]) {
-                            buttonTapped(index: index)
-                        }
-                    }
-                }
-                HStack{
-                    ForEach(12..<16) { index in
-                        Button(emojiShowing[index] == false ? tileBack : tiles[index]) {
-                            buttonTapped(index: index)
-                        }
-                    }
-                }
-            }
+                }            }
             .font(.largeTitle)
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
